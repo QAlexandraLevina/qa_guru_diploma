@@ -1,3 +1,4 @@
+import allure
 from selene import browser, have, be
 from web_baze.data.users import UserData
 
@@ -49,23 +50,23 @@ class Header:
         return self
 
 
-    """Проверка отображения всех основных пунктов в Хедере у неавторизованного пользователя"""
-    def should_have_menu_items_unauthorized(self):
-        self.logo_unauthorized.should(be.visible)
-        expected_items_unauthorized = ['ГЛАВНАЯ', 'СООБЩЕСТВА', 'РЕЙТИНГ', 'НОВОСТИ', 'ДОРОЖНАЯ КАРТА', 'РЕГИСТРАЦИЯ']
-        for item in expected_items_unauthorized:
-            self.tabs_header_unauthorized.element_by(have.text(item)).should(be.visible)
-        return self
+    with allure.step("Проверка отображения элементов хедера неавторизованным пользователем"):
+        def should_have_menu_items_unauthorized(self):
+            self.logo_unauthorized.should(be.visible)
+            expected_items_unauthorized = ['ГЛАВНАЯ', 'СООБЩЕСТВА', 'РЕЙТИНГ', 'НОВОСТИ', 'ДОРОЖНАЯ КАРТА', 'РЕГИСТРАЦИЯ']
+            for item in expected_items_unauthorized:
+                self.tabs_header_unauthorized.element_by(have.text(item)).should(be.visible)
+            return self
 
 
-    """Клик по каждому пункту Хедера у неавторизованного пользователя"""
-    def click_all_tabs_header_unauthorized(self):
-        self.click_community_tab_unauthorized()
-        self.click_rating_tab_unauthorized()
-        self.click_news_tab_unauthorized()
-        self.click_news_tab_unauthorized()
-        self.click_roadmap_tab_unauthorized()
-        self.click_personal_account_tab_unauthorized()
+    with allure.step("Прокликивание элементов хедера неавторизованным пользователем"):
+        def click_all_tabs_header_unauthorized(self):
+            self.click_community_tab_unauthorized()
+            self.click_rating_tab_unauthorized()
+            self.click_news_tab_unauthorized()
+            self.click_news_tab_unauthorized()
+            self.click_roadmap_tab_unauthorized()
+            self.click_personal_account_tab_unauthorized()
 
 
 
@@ -105,31 +106,30 @@ class Header:
         self.setting_tab.click()
         return self
 
-
-    def click_log_out_tab(self):
-        self.log_out_tab.click()
-        return self
-
-
-    """Проверка отображения всех основных пунктов в Хедере у авторизованного пользователя"""
-    def should_have_menu_items_authorized(self, user: UserData):
-        self.logo_authorized.should(be.visible)
-        expected_items_authorized = ['ГЛАВНАЯ', 'СООБЩЕСТВА', 'РЕЙТИНГ', 'НОВОСТИ', 'ДОРОЖНАЯ КАРТА', 'ПОПОЛНЕНИЕ', 'ПРОМОКОД']
-        for point in expected_items_authorized:
-            self.tabs_header_authorized.element_by(have.text(point)).should(be.visible)
-        self.mail_name_tab.should(be.visible).should(have.text(user.mail.upper()))
-        self.notification_tab_open.should(be.visible)
-        self.setting_tab.should(be.visible)
-        self.log_out_tab.should(be.visible)
-        return self
+    with allure.step("Выход из аккаунта"):
+        def click_log_out_tab(self):
+            self.log_out_tab.click()
+            return self
 
 
-    """Клик по каждому пункту Хедера у авторизованного пользователя"""
-    def click_all_tabs_header_authorized(self, user: UserData):
-        self.click_main_tab_authorized()
-        self.click_refill_tab_authorized()
-        self.click_promocode_tab_authorized()
-        self.click_mail_name_tab_authorized(user.mail.upper())
-        self.click_notification_tabs_authorized()
-        self.click_setting_tab_authorized()
-        self.click_log_out_tab()
+    with allure.step("Проверка отображения элементов хедера авторизованным пользователем"):
+        def should_have_menu_items_authorized(self, user: UserData):
+            self.logo_authorized.should(be.visible)
+            expected_items_authorized = ['ГЛАВНАЯ', 'СООБЩЕСТВА', 'РЕЙТИНГ', 'НОВОСТИ', 'ДОРОЖНАЯ КАРТА', 'ПОПОЛНЕНИЕ', 'ПРОМОКОД']
+            for point in expected_items_authorized:
+                self.tabs_header_authorized.element_by(have.text(point)).should(be.visible)
+            self.mail_name_tab.should(be.visible).should(have.text(user.mail.upper()))
+            self.notification_tab_open.should(be.visible)
+            self.setting_tab.should(be.visible)
+            self.log_out_tab.should(be.visible)
+            return self
+
+
+    with allure.step("Прокликивание элементов хедера авторизованным пользователем"):
+        def click_all_tabs_header_authorized(self, user: UserData):
+            self.click_main_tab_authorized()
+            self.click_refill_tab_authorized()
+            self.click_promocode_tab_authorized()
+            self.click_mail_name_tab_authorized(user.mail.upper())
+            self.click_notification_tabs_authorized()
+            self.click_setting_tab_authorized()
