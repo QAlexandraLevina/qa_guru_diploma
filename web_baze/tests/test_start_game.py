@@ -1,11 +1,13 @@
 import allure
+import pytest
+
 from web_baze.pages.start_game import StartGame
 
 
 start_game = StartGame()
 
-
-allure.title("Проверка блока 'Как начать играть' при нажатии на кнопку 'Начать игру'")
+@pytest.mark.web
+@allure.title("Проверка блока 'Как начать играть' при нажатии на кнопку 'Начать игру'")
 def test_start_game(setup_browser, open_base_page):
     # browser = setup_browser
 

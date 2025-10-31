@@ -1,11 +1,12 @@
+import pytest
 from web_baze.pages.key_features import KeyFeatures
 import allure
 
 
 key_features = KeyFeatures()
 
-
-allure.title("Скролл до блока 'Ключевые особенности' и проверка блока")
+@pytest.mark.web
+@allure.title("Скролл до блока 'Ключевые особенности' и проверка блока")
 def test_key_features(setup_browser, open_base_page):
     browser = setup_browser
 

@@ -5,6 +5,7 @@ from web_baze.pages.refill_page import RefillPage
 
 refill_page = RefillPage()
 
+@pytest.mark.web
 @allure.title("Пополнение без бонуса")
 def test_refill_page_without_bonus(open_refill_page):
     """
@@ -23,7 +24,7 @@ def test_refill_page_without_bonus(open_refill_page):
      .should_link_to_button_top_up()
     )
 
-
+@pytest.mark.web
 @allure.title("Автоматическая активация бонуса при вводе суммы")
 @pytest.mark.parametrize('input_amount, expected_bonus, expected_conversion', [
     ('300', '100\n+20', '100\n+20'),
@@ -44,6 +45,7 @@ def test_bonus_auto_activation(open_refill_page, input_amount, expected_bonus, e
      )
 
 
+@pytest.mark.web
 @allure.title("Ручной выбор бонуса кликом на плитку")
 @pytest.mark.parametrize('bonus_name, expected_amount, expected_conversion', [
     ('100\n+20', '300', '100\n+20'),

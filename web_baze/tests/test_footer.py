@@ -1,11 +1,12 @@
 import allure
+import pytest
 from web_baze.pages.footer import Footer
 
 
 footer = Footer()
 
-
-allure.title("Скролл до блока футера и проверка футера")
+@pytest.mark.web
+@allure.title("Скролл до блока футера и проверка футера")
 def test_footer(setup_browser, open_base_page):
     browser = setup_browser
 

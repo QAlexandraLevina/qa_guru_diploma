@@ -5,6 +5,7 @@ from web_baze.pages.promocode_page import PromocodePage
 
 promocode_page = PromocodePage()
 
+@pytest.mark.web
 @allure.title("Ввод невалидного промокода")
 def test_invalid_promocode_input(open_promocode_page):
     (promocode_page
@@ -14,6 +15,7 @@ def test_invalid_promocode_input(open_promocode_page):
 
 
 ### ДЛЯ ДОРАБОТКИ В БУДУЩЕМ ###
+# @pytest.mark.web
 # @allure.title("Ввод валидного промокода")
 # @pytest.mark.parametrize('valid_promocode', [
 #     'VALID1', 'VALID2',
