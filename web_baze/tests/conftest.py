@@ -79,7 +79,7 @@ def setup_browser(request):
     attachments.add_screenshot(browser)
     attachments.add_logs(browser)
     attachments.add_html(browser)
-    # attachments.add_video(browser)
+    # utils.add_video(browser)
 
 
     """Закрытие браузера"""
