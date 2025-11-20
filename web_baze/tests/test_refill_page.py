@@ -24,6 +24,7 @@ def test_refill_page_without_bonus(open_refill_page):
      .should_link_to_button_top_up()
     )
 
+
 @pytest.mark.web
 @allure.title("Автоматическая активация бонуса при вводе суммы")
 @pytest.mark.parametrize('input_amount, expected_bonus, expected_conversion', [

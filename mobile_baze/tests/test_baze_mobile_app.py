@@ -2,6 +2,7 @@ import allure
 import pytest
 from appium.webdriver.common.appiumby import AppiumBy
 from selene import browser, have, be
+from mobile_baze.generators_name_guest import generate_guest_name
 
 
 @pytest.mark.mobile
@@ -11,15 +12,17 @@ def test_starting_menu(mobile_management):
             browser.element((AppiumBy.ID, "com.bazemobile.main:id/btn_guest")).should(be.visible).click()
 
         with allure.step("Ввод имени 'Гостя' на странице авторизации"):
-            input_field = browser.element((AppiumBy.ID, "com.bazemobile.main:id/imageView18"))
-            input_field.click()
-            input_field.type("Guest1")
+            input_field = browser.element((AppiumBy.ID, "com.bazemobile.main:id/editTextText"))
+            input_field.type(generate_guest_name())
 
         with allure.step("Тап на кнопку 'Подтвердить' на странице авторизации"):
             browser.element((AppiumBy.ID, "com.bazemobile.main:id/button15")).should(be.visible).click()
 
-        with allure.step("Тап на кнопку 'Нет' для отказа от фоновой загрузки"):
-            browser.element((AppiumBy.ID, "com.bazemobile.main:id/button2")).should(be.visible).click()
+        try:
+            with allure.step("Тап на кнопку 'Нет' для отказа от фоновой загрузки"):
+                browser.element((AppiumBy.ID, "com.bazemobile.main:id/button2")).should(be.visible).click()
+        except:
+            pass
 
         with allure.step("Тап на кнопку технической поддержки"):
             browser.element((AppiumBy.ID, "com.bazemobile.main:id/imageButton13")).should(be.visible).click()

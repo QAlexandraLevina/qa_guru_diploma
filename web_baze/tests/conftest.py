@@ -1,16 +1,14 @@
 import os
-import allure
 import pytest
+from dotenv import load_dotenv
 from selene.support.shared import browser
-from web_baze.pages.authorization_form import AuthorizationForm
-from web_baze.data.users import UserData
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-from web_baze.utils import attachments
-from dotenv import load_dotenv
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
-
+from web_baze.data.users import UserData
+from web_baze.pages.authorization_form import AuthorizationForm
+from web_baze.utils import attachments
 
 DEFAULT_BROWSER_VERSION = "128.0"
 
@@ -36,31 +34,33 @@ def setup_browser(request):
 
 
     """Настройка драйвера"""
-    # options = Options()
-    # selenoid_capabilities = {
-    #     "browserName": "chrome",
-    #     "browserVersion": browser_version,
-    #     "selenoid:options": {
-    #         "enableVNC": True,
-    #         "enableVideo": True
-    #     }
-    # }
-    # options.capabilities.update(selenoid_capabilities)
-    #
-    #
-    # """Создание переменных, cсылающихся на секретные данные"""
-    # selenoid_login = os.getenv('SELENOID_LOGIN')
-    # selenoid_password = os.getenv('SELENOID_PASSWORD')
-    #
-    #
-    # """Создание драйвера"""
-    # driver = webdriver.Remote(
-    #     command_executor=f"https://{selenoid_login}:{selenoid_password}@selenoid.autotests.cloud/wd/hub",
-    #     options=options
-    # )
-
     options = Options()
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+    selenoid_capabilities = {
+        "browserName": "chrome",
+        "browserVersion": browser_version,
+        "selenoid:options": {
+            "enableVNC": True,
+            "enableVideo": True
+        }
+    }
+    options.capabilities.update(selenoid_capabilities)
+
+
+    """Создание переменных, cсылающихся на секретные данные"""
+    selenoid_login = os.getenv('SELENOID_LOGIN')
+    selenoid_password = os.getenv('SELENOID_PASSWORD')
+
+
+    """Создание драйвера"""
+    driver = webdriver.Remote(
+        command_executor=f"https://{selenoid_login}:{selenoid_password}@selenoid.autotests.cloud/wd/hub",
+        options=options
+    )
+
+    # """Драйвер для локального запуска тестов"""
+    # options = Options()
+    # driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+
     """Передача драйвера в Selene"""
     browser.config.driver = driver
 
@@ -79,7 +79,7 @@ def setup_browser(request):
     attachments.add_screenshot(browser)
     attachments.add_logs(browser)
     attachments.add_html(browser)
-    # utils.add_video(browser)
+    attachments.add_video(browser)
 
 
     """Закрытие браузера"""

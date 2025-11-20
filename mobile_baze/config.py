@@ -29,7 +29,7 @@ def context_manager(context):
         options.set_capability('app', os.getenv('APP'))
         options.set_capability(
             'bstack:options', {
-                "projectName": "Wikipedia project",
+                "projectName": "Baze project",
                 "buildName": "browserstack-build-1",
                 "sessionName": "BStack test",
                 "userName": os.getenv('BS_USER_NAME'),
