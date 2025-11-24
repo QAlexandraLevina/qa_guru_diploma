@@ -7,9 +7,10 @@ key_features = KeyFeatures()
 
 @pytest.mark.web
 @allure.title("Скролл до блока 'Ключевые особенности' и проверка блока")
-def test_key_features(setup_browser, open_base_page):
+def test_key_features(setup_browser):
     browser = setup_browser
 
+    browser.open("/")
 
     with allure.step("Скролл до раздела 'Ключевые особенности'"):
         browser.execute_script("arguments[0].scrollIntoView();", key_features.key_feature_title.locate())
