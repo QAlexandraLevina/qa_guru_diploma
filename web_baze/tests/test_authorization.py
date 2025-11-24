@@ -7,9 +7,10 @@ authorization_form = AuthorizationForm()
 
 @pytest.mark.web
 @allure.title("Авторизация и проверка авторизации пользователя")
-def test_authorization_form(setup_browser, open_base_page, user_authorized):
-    # browser = setup_browser
+def test_authorization_form(setup_browser, user_authorized):
+    browser = setup_browser
 
+    browser.open("/")
 
     with allure.step("Авторизация пользователя"):
         authorization_form.authorization_user(user_authorized)
