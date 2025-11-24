@@ -118,7 +118,8 @@ class Header:
             expected_items_authorized = ['ГЛАВНАЯ', 'СООБЩЕСТВА', 'РЕЙТИНГ', 'НОВОСТИ', 'ДОРОЖНАЯ КАРТА', 'ПОПОЛНЕНИЕ', 'ПРОМОКОД']
             for point in expected_items_authorized:
                 self.tabs_header_authorized.element_by(have.text(point)).should(be.visible)
-            self.mail_name_tab.should(be.visible).should(have.text(user.mail.upper()))
+            masked_email = f"{user.mail[0].upper()}*******@{user.mail.split('@')[1].upper()}"
+            self.mail_name_tab.should(be.visible).should(have.text(masked_email))
             self.notification_tab_open.should(be.visible)
             self.setting_tab.should(be.visible)
             self.log_out_tab.should(be.visible)
