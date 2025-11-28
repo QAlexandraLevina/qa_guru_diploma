@@ -29,7 +29,7 @@ def test_header_authorized_user(authenticated_user):
 
     header.should_have_menu_items_authorized(authenticated_user)
 
-    header.click_all_tabs_header_authorized(authenticated_user)
+    header.click_all_tabs_header_authorized()
 
 
 @pytest.mark.web

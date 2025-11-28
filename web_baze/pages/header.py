@@ -1,5 +1,5 @@
 import allure
-from selene import browser, have, be
+from selene import browser, have, be, query
 from web_baze.data.users import UserData
 
 
@@ -91,8 +91,8 @@ class Header:
         return self
 
 
-    def click_mail_name_tab_authorized(self, par_mail):
-        self.mail_name_tab.should(have.text(par_mail)).click()
+    def click_mail_name_tab_authorized(self):
+        self.mail_name_tab.click()
         return self
 
 
@@ -127,10 +127,10 @@ class Header:
 
 
     with allure.step("Прокликивание элементов хедера авторизованным пользователем"):
-        def click_all_tabs_header_authorized(self, user: UserData):
+        def click_all_tabs_header_authorized(self):
             self.click_main_tab_authorized()
             self.click_refill_tab_authorized()
             self.click_promocode_tab_authorized()
-            self.click_mail_name_tab_authorized(user.mail.upper())
+            self.click_mail_name_tab_authorized()
             self.click_notification_tabs_authorized()
             self.click_setting_tab_authorized()
